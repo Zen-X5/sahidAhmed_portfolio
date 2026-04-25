@@ -5,27 +5,44 @@ import { useState } from "react";
 import { Container } from "@/components/layout";
 import { siteConfig } from "@/config/site";
 
-export default function Navbar() {
+type NavbarProps = {
+  activeSectionId?: string;
+  onNavigateSection?: (sectionId: string) => void;
+};
+
+export default function Navbar({ activeSectionId, onNavigateSection }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="fade-in-up sticky top-0 z-50 border-b border-white/10 bg-[#050816]/80 backdrop-blur-xl">
       <Container className="relative">
         <div className="flex h-14 items-center justify-between sm:h-16">
-          <Link href="#hero" className="flex items-center gap-2 text-xs font-medium text-zinc-100 sm:text-sm">
+          <button
+            type="button"
+            onClick={() => onNavigateSection?.("hero")}
+            className="flex items-center gap-2 text-left text-xs font-medium text-zinc-100 sm:text-sm"
+          >
             <span className="inline-block h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_16px_rgba(34,211,238,0.8)]" />
             <span>{siteConfig.name}</span>
-          </Link>
+          </button>
 
           <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
             {siteConfig.navItems.map((item) => (
-              <Link
+              <button
                 key={item.href}
-                href={item.href}
-                className="text-sm text-zinc-300 transition-colors hover:text-cyan-300"
+                type="button"
+                onClick={() => onNavigateSection?.(item.href.replace("#", ""))}
+                className={`relative pb-1 text-sm transition-colors hover:text-cyan-300 ${
+                  activeSectionId === item.href.replace("#", "") ? "text-cyan-200" : "text-zinc-300"
+                }`}
               >
                 {item.label}
-              </Link>
+                <span
+                  className={`absolute -bottom-[2px] left-0 h-[2px] w-full rounded-full bg-cyan-300 transition-opacity ${
+                    activeSectionId === item.href.replace("#", "") ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              </button>
             ))}
           </nav>
 
@@ -59,13 +76,18 @@ export default function Navbar() {
             <ul className="flex flex-col gap-2">
               {siteConfig.navItems.map((item) => (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="block rounded-lg px-3 py-2 text-zinc-200 transition-colors hover:bg-white/5 hover:text-cyan-300"
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onNavigateSection?.(item.href.replace("#", ""));
+                      setMenuOpen(false);
+                    }}
+                    className={`block w-full rounded-lg px-3 py-2 text-left transition-colors hover:bg-white/5 hover:text-cyan-300 ${
+                      activeSectionId === item.href.replace("#", "") ? "text-cyan-200" : "text-zinc-200"
+                    }`}
                   >
                     {item.label}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>
