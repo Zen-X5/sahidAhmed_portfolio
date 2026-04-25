@@ -1,0 +1,35 @@
+export const siteConfig = {
+  name: "Sahid Ahmed",
+  shortName: "Sahid",
+  role: "MERN Stack Developer",
+  location: "Guwahati, India",
+  availability: "Open to internships and freelance opportunities",
+  title: "Sahid Ahmed | MERN Developer Portfolio",
+  description:
+    "Developer portfolio focused on scalable products, real-world architecture, AI systems, and IoT integrations.",
+  url: "https://example.com",
+  ogImage: "/og-image.png",
+  keywords: [
+    "Sahid Ahmed",
+    "MERN Stack Developer",
+    "Next.js Portfolio",
+    "React Developer",
+    "Node.js Developer",
+    "MongoDB",
+    "AI Integration",
+    "IoT Projects",
+    "Full Stack Developer India",
+  ],
+  navItems: [
+    { label: "About", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    { label: "Projects", href: "#projects" },
+    { label: "Experience", href: "#experience" },
+    { label: "Contact", href: "#contact" },
+  ],
+  links: {
+    github: "https://github.com/Zen-X5",
+    linkedin: "https://www.linkedin.com",
+    email: "mailto:hello@example.com",
+  },
+};
