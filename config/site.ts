@@ -21,6 +21,7 @@ export const siteConfig = {
     "Full Stack Developer India",
   ],
   navItems: [
+    { label: "Home", href: "#hero" },
     { label: "About", href: "#about" },
     { label: "Skills", href: "#skills" },
     { label: "Projects", href: "#projects" },

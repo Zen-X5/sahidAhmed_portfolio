@@ -37,6 +37,56 @@ body {
   animation: fade-in-up 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
+.deck-perspective {
+  perspective: 1800px;
+  perspective-origin: center center;
+}
+
+.deck-panel {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.deck-globe-sheen {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(34, 211, 238, 0.12), transparent 24%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.06), transparent 34%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03), transparent 18%, transparent 82%, rgba(255, 255, 255, 0.03));
+  mix-blend-mode: screen;
+  opacity: 0.7;
+}
+
+.deck-enter-from-right {
+  transform-origin: center center;
+  animation: deck-enter-from-right 760ms cubic-bezier(0.22, 0.75, 0.2, 1) both;
+  z-index: 30;
+}
+
+.deck-enter-from-left {
+  transform-origin: center center;
+  animation: deck-enter-from-left 760ms cubic-bezier(0.22, 0.75, 0.2, 1) both;
+  z-index: 30;
+}
+
+.deck-leave-to-left {
+  transform-origin: center center;
+  animation: deck-leave-to-left 760ms cubic-bezier(0.22, 0.75, 0.2, 1) both;
+  z-index: 20;
+}
+
+.deck-leave-to-right {
+  transform-origin: center center;
+  animation: deck-leave-to-right 760ms cubic-bezier(0.22, 0.75, 0.2, 1) both;
+  z-index: 20;
+}
+
 .stagger-children > * {
   animation: fade-in-up 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
@@ -77,13 +127,69 @@ body {
   }
 }
 
+@keyframes deck-enter-from-right {
+  from {
+    opacity: 0.35;
+    transform: translateX(72%) rotateY(-74deg) translateZ(-240px) scale(0.78);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg) translateZ(0) scale(1);
+  }
+}
+
+@keyframes deck-enter-from-left {
+  from {
+    opacity: 0.35;
+    transform: translateX(-72%) rotateY(74deg) translateZ(-240px) scale(0.78);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg) translateZ(0) scale(1);
+  }
+}
+
+@keyframes deck-leave-to-left {
+  from {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg) translateZ(0) scale(1);
+  }
+
+  to {
+    opacity: 0.2;
+    transform: translateX(-36%) rotateY(-78deg) translateZ(-260px) scale(0.72);
+  }
+}
+
+@keyframes deck-leave-to-right {
+  from {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg) translateZ(0) scale(1);
+  }
+
+  to {
+    opacity: 0.2;
+    transform: translateX(36%) rotateY(78deg) translateZ(-260px) scale(0.72);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
   .fade-in-up,
-  .stagger-children > * {
+  .stagger-children > *,
+  .deck-enter-from-right,
+  .deck-enter-from-left,
+  .deck-leave-to-left,
+  .deck-leave-to-right {
     animation: none !important;
+  }
+
+  .deck-globe-sheen {
+    opacity: 0.2;
   }
 }
