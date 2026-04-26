@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-label="MoodMaps project slide">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#062532"/>
+      <stop offset="55%" stop-color="#0d2a5f"/>
+      <stop offset="100%" stop-color="#260d47"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <rect width="1200" height="750" fill="url(#glow)"/>
+  <g fill="none" stroke="#22d3ee" stroke-opacity="0.3">
+    <path d="M110 550 Q290 430 470 500 T840 430 T1120 470" stroke-width="2"/>
+    <path d="M80 310 Q300 190 560 270 T1120 220" stroke-width="1.6"/>
+  </g>
+  <g fill="#22d3ee">
+    <circle cx="220" cy="480" r="12"/>
+    <circle cx="420" cy="430" r="10"/>
+    <circle cx="680" cy="470" r="14"/>
+    <circle cx="900" cy="390" r="11"/>
+  </g>
+  <g fill="#e2e8f0" font-family="Segoe UI, Arial, sans-serif">
+    <text x="90" y="130" font-size="58" font-weight="700">MoodMaps</text>
+    <text x="90" y="182" font-size="28" opacity="0.85">Real-time Emotion Heatmapping</text>
+  </g>
+  <rect x="88" y="570" width="430" height="90" rx="16" fill="#020617" fill-opacity="0.5" stroke="#22d3ee" stroke-opacity="0.35"/>
+  <text x="118" y="625" fill="#bae6fd" font-family="Segoe UI, Arial" font-size="24">Live location mood insights</text>
+</svg>

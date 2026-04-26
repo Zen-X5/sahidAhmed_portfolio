@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { Container } from "@/components/layout";
 import { siteConfig } from "@/config/site";
@@ -47,12 +46,13 @@ export default function Navbar({ activeSectionId, onNavigateSection }: NavbarPro
           </nav>
 
           <div className="hidden md:block">
-            <Link
-              href="#contact"
+            <button
+              type="button"
+              onClick={() => onNavigateSection?.("contact")}
               className="rounded-full border border-cyan-400/50 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-200 transition-colors hover:bg-cyan-400/20"
             >
               Let&apos;s Talk
-            </Link>
+            </button>
           </div>
 
           <button
@@ -91,13 +91,16 @@ export default function Navbar({ activeSectionId, onNavigateSection }: NavbarPro
                 </li>
               ))}
             </ul>
-            <Link
-              href="#contact"
-              onClick={() => setMenuOpen(false)}
+            <button
+              type="button"
+              onClick={() => {
+                onNavigateSection?.("contact");
+                setMenuOpen(false);
+              }}
               className="mt-3 block rounded-lg border border-cyan-400/50 bg-cyan-500/10 px-3 py-2 text-center text-sm font-medium text-cyan-200"
             >
               Let&apos;s Talk
-            </Link>
+            </button>
           </nav>
         ) : null}
       </Container>

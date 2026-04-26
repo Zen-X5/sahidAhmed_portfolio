@@ -10,6 +10,8 @@ export type Project = {
   highlights: string[];
   liveUrl?: string;
   githubUrl?: string;
+  image?: string;
+  images?: string[];
 };
 
 export type ExperienceItem = {

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-label="Disaster Alert project slide">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#140f2f"/>
+      <stop offset="45%" stop-color="#0b1a38"/>
+      <stop offset="100%" stop-color="#0b2f3f"/>
+    </linearGradient>
+    <linearGradient id="warn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fb7185"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <g fill="none" stroke="#93c5fd" stroke-opacity="0.22">
+    <path d="M120 180 H1080"/>
+    <path d="M120 260 H1080"/>
+    <path d="M120 340 H1080"/>
+    <path d="M120 420 H1080"/>
+    <path d="M120 500 H1080"/>
+  </g>
+  <g>
+    <rect x="120" y="128" width="410" height="106" rx="14" fill="#0b1022" fill-opacity="0.55" stroke="#fb7185" stroke-opacity="0.5"/>
+    <text x="158" y="194" fill="#fecdd3" font-family="Segoe UI, Arial" font-size="34" font-weight="700">Alert: Flood Risk 87%</text>
+  </g>
+  <path d="M140 560 C250 500 320 610 420 548 C520 486 600 596 700 536 C800 476 900 598 1060 520" fill="none" stroke="url(#warn)" stroke-width="8" stroke-linecap="round"/>
+  <g fill="#e2e8f0" font-family="Segoe UI, Arial, sans-serif">
+    <text x="120" y="92" font-size="56" font-weight="700">Disaster Alert System</text>
+    <text x="120" y="660" font-size="28" opacity="0.9">Live monitoring across APIs + IoT signals</text>
+  </g>
+</svg>

@@ -1,7 +1,8 @@
 "use client";
 
-import { ReactNode, useCallback, useMemo, useState } from "react";
+import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Navbar from "./Navbar";
+import TechBackdrop from "@/components/visuals/TechBackdrop";
 
 type DeckSection = {
   id: string;
@@ -14,12 +15,14 @@ type SectionDeckProps = {
 };
 
 const ANIMATION_MS = 700;
+const DECK_NAVIGATE_EVENT = "deck:navigate";
 
 export default function SectionDeck({ sections }: SectionDeckProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [incomingIndex, setIncomingIndex] = useState<number | null>(null);
   const [direction, setDirection] = useState<1 | -1>(1);
   const [isAnimating, setIsAnimating] = useState(false);
+  const animateToRef = useRef<(nextIndex: number) => void>(() => {});
 
   const activeSection = sections[activeIndex];
   const incomingSection = incomingIndex !== null ? sections[incomingIndex] : null;
@@ -46,6 +49,52 @@ export default function SectionDeck({ sections }: SectionDeckProps) {
   const goPrev = useCallback(() => animateTo(activeIndex - 1), [activeIndex, animateTo]);
   const goNext = useCallback(() => animateTo(activeIndex + 1), [activeIndex, animateTo]);
 
+  useEffect(() => {
+    animateToRef.current = animateTo;
+  }, [animateTo]);
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const customEvent = event as CustomEvent<{ sectionId?: string }>;
+      const sectionId = customEvent.detail?.sectionId;
+
+      if (!sectionId) {
+        return;
+      }
+
+      const nextIndex = sections.findIndex((section) => section.id === sectionId);
+      animateTo(nextIndex);
+    };
+
+    window.addEventListener(DECK_NAVIGATE_EVENT, handler);
+    return () => window.removeEventListener(DECK_NAVIGATE_EVENT, handler);
+  }, [animateTo, sections]);
+
+  useEffect(() => {
+    const handleHashNavigation = () => {
+      const sectionId = window.location.hash.replace("#", "");
+
+      if (!sectionId) {
+        return;
+      }
+
+      const nextIndex = sections.findIndex((section) => section.id === sectionId);
+      animateToRef.current(nextIndex);
+    };
+
+    handleHashNavigation();
+    window.addEventListener("hashchange", handleHashNavigation);
+    return () => window.removeEventListener("hashchange", handleHashNavigation);
+  }, [sections]);
+
+  useEffect(() => {
+    const nextHash = `#${activeSection.id}`;
+
+    if (window.location.hash !== nextHash) {
+      window.history.replaceState(null, "", nextHash);
+    }
+  }, [activeSection.id]);
+
   const activePanelClass = useMemo(() => {
     if (!isAnimating) {
       return "deck-panel";
@@ -66,6 +115,8 @@ export default function SectionDeck({ sections }: SectionDeckProps) {
     <div
       className="deck-perspective relative h-screen overflow-hidden"
     >
+      <TechBackdrop />
+
       <Navbar
         activeSectionId={activeSection.id}
         onNavigateSection={(sectionId) => {
